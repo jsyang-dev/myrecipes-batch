@@ -1,1 +1,66 @@
+spring:
+  profiles:
+    active: local
+  batch:
+    job:
+      names: ${job.name:NONE}
 
+app:
+  artifactId: @project.artifactId@
+
+---
+spring:
+  profiles: local
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost/myrecipes?serverTimezone=Asia/Seoul&useSSL=false
+    username: mruser
+    password: P@ssw0rd!
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    hibernate:
+      use-new-id-generator-mappings: false
+
+logging:
+  level:
+    org.hibernate.type.descriptor.sql: TRACE
+
+---
+spring:
+  profiles: dev
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://myrecipes-dev.cwnkdef17vae.ap-northeast-2.rds.amazonaws.com/myrecipes?serverTimezone=Asia/Seoul&useSSL=false
+    username: mruser
+    password: P@ssw0rd!
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    hibernate:
+      use-new-id-generator-mappings: false
+
+logging:
+  level:
+    org.hibernate.type.descriptor.sql: TRACE
+
+---
+spring:
+  profiles: prod
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://myrecipes-dev.cwnkdef17vae.ap-northeast-2.rds.amazonaws.com/myrecipes?serverTimezone=Asia/Seoul&useSSL=false
+    username: mruser
+    password: P@ssw0rd!
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    hibernate:
+      use-new-id-generator-mappings: false
+
+logging:
+  level:
+    org.hibernate.type.descriptor.sql: TRACE
