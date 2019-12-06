@@ -3,6 +3,18 @@
     {
       "name": "app.artifactId",
       "type": "java.lang.String"
+    },
+    {
+      "name": "cloud.aws.s3.bucket",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "cloud.aws.region.static",
+      "type": "java.lang.String"
+    },
+    {
+      "name": "cloud.aws.s3.bucket",
+      "type": "java.lang.String"
     }
   ]
 }
