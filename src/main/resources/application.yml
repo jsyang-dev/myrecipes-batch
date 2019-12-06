@@ -28,6 +28,13 @@ logging:
     org.hibernate.type.descriptor.sql: TRACE
     org.springframework.batch: DEBUG
 
+cloud:
+  aws:
+    region:
+      static: ap-northeast-2
+    s3:
+      bucket: local.static.myrecipes.link
+
 ---
 spring:
   profiles: dev
@@ -47,6 +54,13 @@ logging:
   level:
     org.hibernate.type.descriptor.sql: TRACE
 
+cloud:
+  aws:
+    region:
+      static: ap-northeast-2
+    s3:
+      bucket: dev.static.myrecipes.link
+
 ---
 spring:
   profiles: prod
@@ -65,3 +79,10 @@ spring:
 logging:
   level:
     org.hibernate.type.descriptor.sql: TRACE
+
+cloud:
+  aws:
+    region:
+      static: ap-northeast-2
+    s3:
+      bucket: static.myrecipes.link

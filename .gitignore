@@ -247,3 +247,5 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
+# Custom
+src/main/resources/aws.yml
