@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface S3Helper {
     List<S3Object> listObjects(String prefix);
+
+    void deleteObject(String key);
 }
