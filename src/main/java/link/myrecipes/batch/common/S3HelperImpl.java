@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.DeleteObjectRequest;
 import software.amazon.awssdk.services.s3.model.ListObjectsV2Request;
 import software.amazon.awssdk.services.s3.model.ListObjectsV2Response;
 import software.amazon.awssdk.services.s3.model.S3Object;
@@ -33,5 +34,14 @@ public class S3HelperImpl implements S3Helper {
                 .build();
         ListObjectsV2Response listObjectsV2Response = this.s3Client.listObjectsV2(listObjectsV2Request);
         return listObjectsV2Response.contents();
+    }
+
+    @Override
+    public void deleteObject(String key) {
+        DeleteObjectRequest deleteObjectRequest = DeleteObjectRequest.builder()
+                .bucket(this.bucket)
+                .key(key)
+                .build();
+        this.s3Client.deleteObject(deleteObjectRequest);
     }
 }
