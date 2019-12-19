@@ -35,6 +35,10 @@ cloud:
     s3:
       bucket: local.static.myrecipes.link
 
+app:
+  popular-recipes:
+    page-size: 9
+
 ---
 spring:
   profiles: dev
@@ -61,6 +65,10 @@ cloud:
     s3:
       bucket: dev.static.myrecipes.link
 
+app:
+  popular-recipes:
+    page-size: 9
+
 ---
 spring:
   profiles: prod
@@ -86,3 +94,7 @@ cloud:
       static: ap-northeast-2
     s3:
       bucket: static.myrecipes.link
+
+app:
+  popular-recipes:
+    page-size: 9
