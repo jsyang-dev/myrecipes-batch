@@ -15,6 +15,10 @@
     {
       "name": "cloud.aws.s3.bucket",
       "type": "java.lang.String"
+    },
+    {
+      "name": "app.popular-recipes.page-size",
+      "type": "java.lang.Integer"
     }
   ]
 }
