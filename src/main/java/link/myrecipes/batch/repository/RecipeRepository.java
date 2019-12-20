@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface RecipeRepository extends JpaRepository<RecipeEntity, Integer> {
     List<RecipeEntity> findAllByOrderByImageAsc();
+
+    List<RecipeEntity> findAllByOrderByReadCountDesc();
 }

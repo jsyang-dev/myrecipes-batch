@@ -5,6 +5,7 @@ import link.myrecipes.batch.domain.RecipeStepEntity;
 import link.myrecipes.batch.repository.RecipeStepRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import software.amazon.awssdk.services.s3.model.S3Object;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class DeleteStepImageServiceImpl implements DeleteStepImageService {
     }
 
     @Override
+    @Transactional
     public void delete(String prefix) {
         List<S3Object> s3ObjectList = this.s3Helper.listObjects(prefix);
         List<RecipeStepEntity> recipeStepEntityList = this.recipeStepRepository.findByImageNotOrderByImageAsc("");

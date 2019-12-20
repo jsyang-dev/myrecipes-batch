@@ -52,9 +52,9 @@ public class DeleteStepImageJobConfig {
 
     @Bean(TASKLET_NAME)
     @StepScope
-    public Tasklet tasklet(@Value("#{jobParameters['requestDate']}") String requestDate) {
+    public Tasklet tasklet(@Value("#{jobParameters['version']}") String version) {
         return (contribution, chunkContext) -> {
-            if (requestDate != null) {
+            if (version != null) {
                 this.deleteStepImageService.delete("step");
             }
             return RepeatStatus.FINISHED;

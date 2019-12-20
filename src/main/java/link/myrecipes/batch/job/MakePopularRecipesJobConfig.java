@@ -14,7 +14,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static link.myrecipes.batch.job.DeleteRecipeImageJobConfig.JOB_NAME;
+import static link.myrecipes.batch.job.MakePopularRecipesJobConfig.JOB_NAME;
 
 @Configuration
 @ConditionalOnProperty(name = "job.name", havingValue = JOB_NAME)
@@ -47,15 +47,15 @@ public class MakePopularRecipesJobConfig {
     public Step step() {
         return stepBuilderFactory
                 .get(STEP_NAME)
-                .tasklet(tasklet(0))
+                .tasklet(tasklet(null))
                 .build();
     }
 
     @Bean(TASKLET_NAME)
     @StepScope
-    public Tasklet tasklet(@Value("#{jobParameters['seq']}") int seq) {
+    public Tasklet tasklet(@Value("#{jobParameters['version']}") String version) {
         return (contribution, chunkContext) -> {
-            if (seq > 0) {
+            if (version != null) {
                 this.makePopularRecipes.make();
             }
             return RepeatStatus.FINISHED;
