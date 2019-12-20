@@ -15,14 +15,17 @@ public class PopularRecipesDocument {
 
     private String title;
 
+    private Integer readCount;
+
     private List<String> recipeTagList;
 
     private Integer sequence;
 
     @Builder
-    public PopularRecipesDocument(Integer id, String title, List<String> recipeTagList) {
+    public PopularRecipesDocument(Integer id, String title, Integer readCount, List<String> recipeTagList) {
         this.id = id;
         this.title = title;
+        this.readCount = readCount;
         this.recipeTagList = recipeTagList;
     }
 

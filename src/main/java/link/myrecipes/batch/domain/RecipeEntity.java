@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Table(name = "recipe")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString
+@ToString(exclude = "recipeTagEntityList")
 @JsonIgnoreProperties("hibernateLazyInitializer")
 public class RecipeEntity {
     @Id
@@ -34,15 +34,16 @@ public class RecipeEntity {
     @Column(nullable = false)
     private Integer readCount;
 
-    @OneToMany(mappedBy = "recipeEntity", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "recipeEntity", cascade = CascadeType.ALL)
     private List<RecipeTagEntity> recipeTagEntityList = new ArrayList<>();
 
     @Builder
-    public RecipeEntity(String title, String image, Integer estimatedTime, Integer difficulty) {
+    public RecipeEntity(String title, String image, Integer estimatedTime, Integer difficulty, Integer readCount) {
         this.title = title;
         this.image = image;
         this.estimatedTime = estimatedTime;
         this.difficulty = difficulty;
+        this.readCount = readCount;
     }
 
     public void addRecipeTag(RecipeTagEntity recipeTagEntity) {
@@ -53,6 +54,7 @@ public class RecipeEntity {
         return PopularRecipesDocument.builder()
                 .id(this.getId())
                 .title(this.getTitle())
+                .readCount(this.readCount)
                 .recipeTagList(this.getRecipeTagEntityList().stream().map(RecipeTagEntity::getTag).collect(Collectors.toList()))
                 .build();
     }

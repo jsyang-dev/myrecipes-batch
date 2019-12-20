@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Table(name = "recipe_tag")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@ToString
+@ToString(exclude = "recipeEntity")
 public class RecipeTagEntity {
     @Id
     @GeneratedValue
