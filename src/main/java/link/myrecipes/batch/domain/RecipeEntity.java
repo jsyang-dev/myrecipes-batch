@@ -54,6 +54,7 @@ public class RecipeEntity {
         return PopularRecipeDocument.builder()
                 .id(this.getId())
                 .title(this.getTitle())
+                .image(this.getImage())
                 .readCount(this.readCount)
                 .recipeTagList(this.getRecipeTagEntityList().stream().map(RecipeTagEntity::getTag).collect(Collectors.toList()))
                 .build();

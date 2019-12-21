@@ -15,6 +15,8 @@ public class PopularRecipeDocument {
 
     private String title;
 
+    private String image;
+
     private Integer readCount;
 
     private List<String> recipeTagList;
@@ -22,9 +24,10 @@ public class PopularRecipeDocument {
     private Integer sequence;
 
     @Builder
-    public PopularRecipeDocument(Integer id, String title, Integer readCount, List<String> recipeTagList) {
+    public PopularRecipeDocument(Integer id, String title, String image, Integer readCount, List<String> recipeTagList) {
         this.id = id;
         this.title = title;
+        this.image = image;
         this.readCount = readCount;
         this.recipeTagList = recipeTagList;
     }
