@@ -1,6 +1,6 @@
 package link.myrecipes.batch.job;
 
-import link.myrecipes.batch.service.MakePopularRecipes;
+import link.myrecipes.batch.service.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -14,25 +14,25 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import static link.myrecipes.batch.job.MakePopularRecipesJobConfig.JOB_NAME;
+import static link.myrecipes.batch.job.MakePopularRecipeListJobConfig.JOB_NAME;
 
 @Configuration
 @ConditionalOnProperty(name = "job.name", havingValue = JOB_NAME)
 @Slf4j
-public class MakePopularRecipesJobConfig {
-    public static final String JOB_NAME = "MakePopularRecipes";
+public class MakePopularRecipeListJobConfig {
+    public static final String JOB_NAME = "MakePopularRecipeList";
     private static final String STEP_NAME = JOB_NAME + "Step";
     private static final String TASKLET_NAME = JOB_NAME + "Tasklet";
 
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
-    private final MakePopularRecipes makePopularRecipes;
+    private final RecipeService recipeService;
 
-    public MakePopularRecipesJobConfig(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory,
-                                       MakePopularRecipes makePopularRecipes) {
+    public MakePopularRecipeListJobConfig(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory,
+                                          RecipeService recipeService) {
         this.jobBuilderFactory = jobBuilderFactory;
         this.stepBuilderFactory = stepBuilderFactory;
-        this.makePopularRecipes = makePopularRecipes;
+        this.recipeService = recipeService;
     }
 
     @Bean(JOB_NAME)
@@ -56,7 +56,7 @@ public class MakePopularRecipesJobConfig {
     public Tasklet tasklet(@Value("#{jobParameters['version']}") String version) {
         return (contribution, chunkContext) -> {
             if (version != null) {
-                this.makePopularRecipes.make();
+                this.recipeService.makePopularRecipeList();
             }
             return RepeatStatus.FINISHED;
         };

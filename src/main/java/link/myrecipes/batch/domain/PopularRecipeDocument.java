@@ -9,7 +9,7 @@ import java.util.List;
 
 @Document(collection = "popular_recipes")
 @Getter
-public class PopularRecipesDocument {
+public class PopularRecipeDocument {
     @Id
     private Integer id;
 
@@ -22,7 +22,7 @@ public class PopularRecipesDocument {
     private Integer sequence;
 
     @Builder
-    public PopularRecipesDocument(Integer id, String title, Integer readCount, List<String> recipeTagList) {
+    public PopularRecipeDocument(Integer id, String title, Integer readCount, List<String> recipeTagList) {
         this.id = id;
         this.title = title;
         this.readCount = readCount;

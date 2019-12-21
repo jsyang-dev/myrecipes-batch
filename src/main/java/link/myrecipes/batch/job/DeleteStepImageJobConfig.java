@@ -1,6 +1,6 @@
 package link.myrecipes.batch.job;
 
-import link.myrecipes.batch.service.DeleteStepImageService;
+import link.myrecipes.batch.service.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
@@ -26,12 +26,13 @@ public class DeleteStepImageJobConfig {
 
     private final JobBuilderFactory jobBuilderFactory;
     private final StepBuilderFactory stepBuilderFactory;
-    private final DeleteStepImageService deleteStepImageService;
+    private final RecipeService recipeService;
 
-    public DeleteStepImageJobConfig(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory, DeleteStepImageService deleteStepImageService) {
+    public DeleteStepImageJobConfig(JobBuilderFactory jobBuilderFactory, StepBuilderFactory stepBuilderFactory,
+                                      RecipeService recipeService) {
         this.jobBuilderFactory = jobBuilderFactory;
         this.stepBuilderFactory = stepBuilderFactory;
-        this.deleteStepImageService = deleteStepImageService;
+        this.recipeService = recipeService;
     }
 
     @Bean(JOB_NAME)
@@ -55,7 +56,7 @@ public class DeleteStepImageJobConfig {
     public Tasklet tasklet(@Value("#{jobParameters['version']}") String version) {
         return (contribution, chunkContext) -> {
             if (version != null) {
-                this.deleteStepImageService.delete("step");
+                this.recipeService.deleteRecipeStepImage("step");
             }
             return RepeatStatus.FINISHED;
         };

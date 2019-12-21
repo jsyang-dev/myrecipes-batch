@@ -50,8 +50,8 @@ public class RecipeEntity {
         this.recipeTagEntityList.add(recipeTagEntity);
     }
 
-    public PopularRecipesDocument toDocument() {
-        return PopularRecipesDocument.builder()
+    public PopularRecipeDocument toDocument() {
+        return PopularRecipeDocument.builder()
                 .id(this.getId())
                 .title(this.getTitle())
                 .readCount(this.readCount)
